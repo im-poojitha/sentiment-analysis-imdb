@@ -8,6 +8,8 @@ This project implements an **end-to-end sentiment analysis system** that classif
 
 The system is intentionally designed as a **clean, interpretable baseline**, prioritizing correctness, reproducibility, and extensibility over unnecessary complexity.
 
+You can view it here: https://sentiment-analysis-imdb-app.streamlit.app/
+
 ---
 
 ## 2. Dataset Description
