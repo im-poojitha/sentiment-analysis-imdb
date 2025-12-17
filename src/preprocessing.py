@@ -67,16 +67,18 @@ def normalize_reviews(
     # Check for required NLTK resources
     try:
         _ = nltk_stopwords.words("english")
-    except LookupError as e:
-        raise ImportError(
-            "NLTK stopwords resource not found. Run: nltk.download('stopwords') before using this function."
-        ) from e
-    try:
-        _ = nltk.data.find('corpora/wordnet')
-    except LookupError as e:
-        raise ImportError(
-            "NLTK wordnet resource not found. Run: nltk.download('wordnet') before using this function."
-        ) from e
+    except LookupError:
+        import nltk
+        nltk.download("stopwords")
+        _ = nltk_stopwords.words("english")
+
+    if lemmatization:
+        try:
+            nltk.data.find("corpora/wordnet")
+        except LookupError:
+            import nltk
+            nltk.download("wordnet")
+
 
     def clean_text(text: str) -> str:
         # All values in the text column are coerced to string before processing.
