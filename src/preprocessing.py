@@ -1,6 +1,8 @@
 import pandas as pd
 import logging
 import re
+from nltk.corpus import stopwords as nltk_stopwords
+
 
 logger = logging.getLogger(__name__)
 
@@ -66,11 +68,11 @@ def normalize_reviews(
 
     # Check for required NLTK resources
     try:
-        _ = nltk_stopwords.words("english")
+        stopword_set = set(nltk_stopwords.words("english"))
     except LookupError:
         import nltk
         nltk.download("stopwords")
-        _ = nltk_stopwords.words("english")
+        stopword_set = set(nltk_stopwords.words("english"))
 
     if lemmatization:
         try:
